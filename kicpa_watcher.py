@@ -87,7 +87,12 @@ def save_seen_ids(posts):
 
 
 def send_discord_notification(post):
-    webhook_url = os.environ.get("https://discord.com/api/webhooks/1543127838016929862/OubLBTd2Hzb3pzzdq5tm4j-QqhS-Elk7pTzDqFEE8x-Ze11nDuFiMMWMffm2FVHF6XEP")
+    webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+
+    print(
+        "Discord webhook env:",
+        "PRESENT" if webhook_url else "MISSING"
+    )
 
     if not webhook_url:
         raise RuntimeError(
@@ -108,6 +113,8 @@ def send_discord_notification(post):
         json=message,
         timeout=10,
     )
+
+    print("Discord status:", response.status_code)
 
     response.raise_for_status()
 
