@@ -53,6 +53,11 @@ def fetch_posts():
             "title": title,
         })
 
+    print("=== PARSED POSTS ===")
+    for post in posts:
+        print(post)
+    print("====================")
+
     return posts
 
 
